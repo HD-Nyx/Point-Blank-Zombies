@@ -18,7 +18,7 @@ Copyright (c) 2025 HD_Nyx
 Permission is granted to use, copy, modify, and distribute my code
 for any purpose, provided that:
 
-1. Credit is given to me or Tissue if you are going to use the resoursepack.
+1. Credit is given to me if you are going to reupload my code or Tissue if you are going to use the resoursepack.
 2. That this project will not used for commercial or monetary gain.
 
 Commercial use is prohibited.
