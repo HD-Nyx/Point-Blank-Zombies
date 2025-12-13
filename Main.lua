@@ -1,9 +1,3 @@
---Defult Values
-    --Health = 20
-    --Damage = 3
-    --Speed = 0.23
-    --FollowRange = 16 or somth i forgot
-
 local function SpawnGenericZombie(Amount, Health, Damage, Speed, FollowRange)
     for I = 1, Amount do
         local Command = '/summon zombie ~ ~ ~ {Health:'..Health..',Attributes:[{Name:"generic.max_health",Base:'..Health..'},{Name:"generic.attack_damage",Base:'..Damage..'},{Name:"generic.movement_speed",Base:'..Speed..'},{Name:"generic.follow_range",Base:'..FollowRange..'}]}'
