@@ -39,6 +39,6 @@ end
 
 
 local function SpawnNewWave()
-    local HealthMultiplier = 1 + (Wave - 1) * 0.15
+    local HealthMultiplier = 1 + (Wave - 1) * 0.1
     local AmountMultiplier = (Wave + 1) * 8
 end

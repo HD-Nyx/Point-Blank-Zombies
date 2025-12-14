@@ -4,7 +4,7 @@
 local Item = "pointblank:ak74"
 local Ammo = "pointblank:ammo545"
 local AmmoAmount = 180
-local Price = 100
+local Price = 2000
 
 while true do
     os.pullEvent("redstone")  
@@ -21,18 +21,18 @@ while true do
              if ItemCount >= 1 then
                 commands.exec('/give @p ' .. Ammo .. ' ' .. AmmoAmount)
                 commands.exec("/scoreboard players remove @p Points " .. Price)
-                commands.exec("/msg @p Purchased: " .. Ammo)
+                commands.exec('/tellraw @p {"text":"Purchase was successful","color":"green","bold":true}')
                 commands.exec('/playsound minecraft:entity.player.levelup master @p ~ ~ ~ 1 0.75')
              else
                 commands.exec('/give @p ' .. Item)
                 commands.exec('/give @p ' .. Ammo .. ' ' .. AmmoAmount)
                 commands.exec("/scoreboard players remove @p Points " .. Price)
-                commands.exec("/msg @p Purchase was successful")
+                commands.exec('/tellraw @p {"text":"Purchase was successful","color":"green","bold":true}')
                 commands.exec('/playsound minecraft:entity.player.levelup master @p ~ ~ ~ 1 0.75')
             end
 
         else
-            commands.exec("/msg @p You don't have enough points peasant")
+            commands.exec('/tellraw @p {"text":"You do not have enough points peasant","color":"red","bold":true}')
             commands.exec('/playsound minecraft:block.note_block.bass master @p ~ ~ ~ 1 0.5')
         end
 
