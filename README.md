@@ -17,17 +17,17 @@ Custom Non-Commercial Software License
 
 Copyright (c) 2025 HD_Nyx 
 
-Permission is granted to use, copy, modify, and distribute my code
+Permission is granted to use, copy, modify, and distribute my code and the resoursepack
 for any purpose, provided that:
 
-1. Credit is given to me if you are going to reupload my code or Tissue if you are going to use the resoursepack.
+1. Credit is given to me if you are going to reupload my code or Tissue and SKT if you are going to use the resoursepack for content/reuploading the pack.
 2. That this project will not used for commercial or monetary gain.
 
 Commercial use is prohibited.
 
-The resource pack included in this project is a modified version of
-**Tissou’s Zombie Pack** by Tissou.
+The resource pack included in this project is a combination version of
+**Tissou’s Zombie Pack** by Tissou and **SKT - Desaturated Vanilla by SKT** + my own additions to it.
 
-The original resource pack and its assets are not owned by me or this project.
+The original resource packs and its assets are not owned by me or this project.
 
-Credits: https://www.curseforge.com/minecraft/texture-packs/tissous-zombie-pack-optifine-1-7x-1-20
+Credits: https://www.curseforge.com/minecraft/texture-packs/tissous-zombie-pack-optifine-1-7x-1-20 and https://www.curseforge.com/minecraft/texture-packs/skt-desaturated-vanilla
