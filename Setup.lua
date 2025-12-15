@@ -24,11 +24,17 @@
 
 commands.exec('/scoreboard objectives add Points dummy "Points"')
 commands.exec('/scoreboard objectives setdisplay sidebar Points')
+commands.exec('/scoreboard objectives add ZombiesAlive dummy')
+commands.exec('/team add Survivors')
+commands.exec('/team modify Survivors friendlyFire false')
 
 --Place these command blocks and put the command and its propertys
 
 --Repeating, Unconditional, Always Active
 --/execute as @a[scores={KilledZombie=1..}] at @s run scoreboard players add @s Points 100
+
+--Chain, Unconditional, Always Active
+--/execute if entity @a[scores={KilledZombie=1..}] run scoreboard players remove #wave ZombiesAlive 1
 
 --Chain, Unconditional, Always Active
 --/scoreboard players reset @a[scores={KilledZombie=1..}] KilledZombie

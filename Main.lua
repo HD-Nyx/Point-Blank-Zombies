@@ -6,6 +6,7 @@ local StarterMelee = "minecraft:wooden_sword{Unbreakable:1b}"
 commands.exec('/gamemode adventure @a')
 commands.exec('/clear @a')
 commands.exec('/scoreboard players set @a Points 0')
+commands.exec('/scoreboard players set #zombies ZombiesAlive 0')
 commands.exec('/give @a ' .. StarterGun)
 commands.exec('/give @a ' .. StarterAmmo .. ' ' .. StarterAmmoAmount)
 commands.exec('/give @a ' .. StarterMelee)
@@ -40,5 +41,6 @@ end
 
 local function SpawnNewWave()
     local HealthMultiplier = 1 + (Wave - 1) * 0.1
-    local AmountMultiplier = (Wave + 1) * 8
+    local AmountOfZombies = (Wave + 1) * 8
+    commands.exec('/scoreboard players add #zombies ZombiesAlive ' .. AmountOfZombies)
 end
