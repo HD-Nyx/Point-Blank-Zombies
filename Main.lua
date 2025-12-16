@@ -5,6 +5,7 @@ local StarterMelee = "minecraft:wooden_sword{Unbreakable:1b}"
 
 commands.exec('/gamemode adventure @a')
 commands.exec('/clear @a')
+commands.exec('/team join Survivors @a')
 commands.exec('/scoreboard players set @a Points 0')
 commands.exec('/scoreboard players set #zombies ZombiesAlive 0')
 commands.exec('/give @a ' .. StarterGun)
