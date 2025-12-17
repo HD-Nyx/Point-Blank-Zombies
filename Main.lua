@@ -22,6 +22,20 @@ local BaseFollowRange = {Generic = 99, Runner = 12, Brute = 99}
 math.randomseed(os.time())
 math.random()
 
+local RandomTips = {
+    'Good luck...',
+    'They are coming.',
+    'Do not be scared..',
+    'There is no hope.',
+    'Monkey see, monkey do',
+    'SURVIVE',
+    'Try not to corner yourself..',
+    'They will slow you down then eat your internal organs',
+    'They will sniff you and track you down...',
+    '-... .-. --- / .. -- .- --. .. -. . / .-- .- ... - .. -. --. / -.-- --- ..- .-. / - .. -- . / - --- / - .-. .- -. ... .-.. .- - . / - .... .. ... / .-.. --- .-..'
+
+}
+
 
 local function SpawnGenericZombie(Amount, Health, Damage, Speed, FollowRange)
     for I = 1, Amount do
@@ -82,9 +96,11 @@ end
 
 local function SpawnNewWave()
     WaveInProgress = true
+    commands.exec('/stopsound @a')
     commands.exec('/playsound minecraft:pointblankzombies.roundstart master @a')
-    commands.exec('/tellraw @a {"text":"Wave '..Wave..' Has Been Completed!","color":"red","bold":true}')
-    sleep(13)
+    commands.exec('/tellraw @a {"text":"Wave '..Wave..' Has Been Completed!","color":"white","bold":true}')
+    commands.exec('/effect give @a minecraft:saturation 10 50 false')
+    sleep(12)
     Wave = Wave + 1
 
     local HealthMultiplier = 1 + (Wave - 1) * 0.1
@@ -93,9 +109,12 @@ local function SpawnNewWave()
     local RunnerChance = math.min(0.2, Wave * 0.02)
     local BruteChance  = math.min(0.2, Wave * 0.015)
 
+    local RandomTip = RandomTips[math.random(#RandomTips)]
+
     commands.exec('/tellraw @a {"text":"Wave '..Wave..'","color":"red","bold":true}')
-    commands.exec('/tellraw @a {"text":"Good Luck...","color":"dark_red","bold":true,"italic":true}')
+    commands.exec('/tellraw @a {"text":"' .. RandomTip .. '","color":"dark_red","bold":true,"italic":true}')
     commands.exec('/scoreboard players set #zombies ZombiesAlive 0')
+    commands.exec('/playsound minecraft:pointblankzombies.ambiance1 master @a ~ ~ ~ 0.5 1')
 
     for i = 1, AmountOfZombies do
         SpawnRandomZombie(HealthMultiplier, RunnerChance, BruteChance)
