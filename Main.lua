@@ -82,6 +82,9 @@ end
 
 local function SpawnNewWave()
     WaveInProgress = true
+    commands.exec('/playsound minecraft:pointblankzombies.roundstart master @a')
+    commands.exec('/tellraw @a {"text":"Wave '..Wave..' Has Been Completed!","color":"red","bold":true}')
+    sleep(13)
     Wave = Wave + 1
 
     local HealthMultiplier = 1 + (Wave - 1) * 0.1
@@ -91,6 +94,7 @@ local function SpawnNewWave()
     local BruteChance  = math.min(0.2, Wave * 0.015)
 
     commands.exec('/tellraw @a {"text":"Wave '..Wave..'","color":"red","bold":true}')
+    commands.exec('/tellraw @a {"text":"Good Luck...","color":"dark_red","bold":true,"italic":true}')
     commands.exec('/scoreboard players set #zombies ZombiesAlive 0')
 
     for i = 1, AmountOfZombies do
