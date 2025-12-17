@@ -15,7 +15,7 @@ Optionally you can use [Vic's Point Blank](https://modrinth.com/mod/vics-point-b
 
 Custom Non-Commercial Software License
 
-Copyright (c) 2025 HD_Nyx 
+Copyright (c) 2025 HD_Nyx & MrButton
 
 Permission is granted to use, copy, modify, and distribute my code and the resoursepack
 for any purpose, provided that:
