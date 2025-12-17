@@ -11,6 +11,8 @@ Optionally you can use [Vic's Point Blank](https://modrinth.com/mod/vics-point-b
 
 [Axiom](https://modrinth.com/mod/axiom) is great for creating display entites and that is what I'm going to be using for my own map (if you are going to use forge/neoforge then you need to install [Sinytra Connecter](https://modrinth.com/mod/connector) + [Forgified Fabric API](https://modrinth.com/mod/forgified-fabric-api) and [Connector Extras](https://modrinth.com/mod/connector-extras)
 
+[Fresh animations](https://modrinth.com/resourcepack/fresh-animations) looks great with the resoursepack [Requries EMF and ETF]
+
 # Licensing
 
 Custom Non-Commercial Software License
