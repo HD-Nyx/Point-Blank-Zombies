@@ -103,6 +103,8 @@ local function SpawnNewWave()
     commands.exec('/effect give @a minecraft:resistance 1 100 true')
     commands.exec('/effect give @a minecraft:darkness 2 0 true')
     commands.exec('/execute at @a run summon minecraft:lightning_bolt ~ ~ ~')
+    commands.exec('/scoreboard players set #zombies ZombiesAlive 0')
+    commands.exec('/kill @e[type=minecraft:zombie]')
     sleep(12)
     Wave = Wave + 1
 
