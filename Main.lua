@@ -107,7 +107,7 @@ local function SpawnNewWave()
     Wave = Wave + 1
 
     local HealthMultiplier = 1 + (Wave - 1) * 0.1
-    local AmountOfZombies = (Wave + 1) * 8
+    local AmountOfZombies = (Wave + 1) * 4
 
     local RunnerChance = math.min(0.2, Wave * 0.02)
     local BruteChance  = math.min(0.2, Wave * 0.015)
@@ -122,7 +122,7 @@ local function SpawnNewWave()
 
     for i = 1, AmountOfZombies do
         SpawnRandomZombie(HealthMultiplier, RunnerChance, BruteChance)
-        sleep(3 + math.random(1, 3))
+        sleep(math.max(0.5, 3 - Wave * 0.05) + math.random() * 0.5)
     end
 end
 
@@ -140,5 +140,5 @@ while true do
     until ZombiesAliveCount == 0
 
     WaveInProgress = false
-    sleep(5)
+    sleep(0.1)
 end
