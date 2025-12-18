@@ -30,6 +30,8 @@ commands.exec('/scoreboard objectives add ZombiesAlive dummy')
 commands.exec('/team add Survivors')
 commands.exec('/team modify Survivors friendlyFire false')
 
+commands.exec('/gamerule doFireTick false')
+
 --Place these command blocks and put the command and its propertys
 
 --Repeating, Unconditional, Always Active

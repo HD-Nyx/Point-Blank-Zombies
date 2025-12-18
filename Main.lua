@@ -100,6 +100,9 @@ local function SpawnNewWave()
     commands.exec('/playsound minecraft:pointblankzombies.roundstart master @a')
     commands.exec('/tellraw @a {"text":"Wave '..Wave..' Has Been Completed!","color":"white","bold":true}')
     commands.exec('/effect give @a minecraft:saturation 10 50 false')
+    commands.exec('/effect give @a minecraft:resistance 1 100 true')
+    commands.exec('/effect give @a minecraft:darkness 2 0 true')
+    commands.exec('/execute at @a run summon minecraft:lightning_bolt ~ ~ ~')
     sleep(12)
     Wave = Wave + 1
 
@@ -109,18 +112,33 @@ local function SpawnNewWave()
     local RunnerChance = math.min(0.2, Wave * 0.02)
     local BruteChance  = math.min(0.2, Wave * 0.015)
 
-    local RandomTip = RandomTips[math.random(#RandomTips)]
+    local RandomTip = RandomTips[math.random(1, 10)]
 
     commands.exec('/tellraw @a {"text":"Wave '..Wave..'","color":"red","bold":true}')
     commands.exec('/tellraw @a {"text":"' .. RandomTip .. '","color":"dark_red","bold":true,"italic":true}')
     commands.exec('/scoreboard players set #zombies ZombiesAlive 0')
     commands.exec('/playsound minecraft:pointblankzombies.ambiance1 master @a ~ ~ ~ 0.5 1')
+    commands.exec('/scoreboard players set #zombies ZombiesAlive ' .. AmountOfZombies)
 
     for i = 1, AmountOfZombies do
         SpawnRandomZombie(HealthMultiplier, RunnerChance, BruteChance)
-        commands.exec('/scoreboard players add #zombies ZombiesAlive 1')
         sleep(3 + math.random(1, 3))
     end
 end
 
-SpawnNewWave()
+while true do
+    if not WaveInProgress then
+        SpawnNewWave()
+    end
+
+    repeat
+        sleep(1)
+        local Output = commands.exec('scoreboard players get #zombies ZombiesAlive')
+        local ZombiesAliveCount = tonumber(
+            (type(Output) == "string" and Output:match('%d+'))
+        ) or 0
+    until ZombiesAliveCount == 0
+
+    WaveInProgress = false
+    sleep(5)
+end
