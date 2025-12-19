@@ -14,6 +14,8 @@ commands.exec('/give @a ' .. StarterMelee)
 
 local Wave = 0
 local WaveInProgress = false
+local ZombiesSpawned = 0
+local AmountOfZombies = 0
 local BaseHealth = {Generic = 20, Runner = 5, Brute = 40}
 local BaseDamage = {Generic = 3, Runner = 1.5, Brute = 6}
 local BaseSpeed = {Generic = 0.3, Runner = 0.4, Brute = 0.25}
@@ -109,7 +111,7 @@ local function SpawnNewWave()
     Wave = Wave + 1
 
     local HealthMultiplier = 1 + (Wave - 1) * 0.1
-    local AmountOfZombies = (Wave + 1) * 4
+    AmountOfZombies = (Wave + 1) * 4
 
     local RunnerChance = math.min(0.2, Wave * 0.02)
     local BruteChance  = math.min(0.2, Wave * 0.015)
@@ -124,6 +126,7 @@ local function SpawnNewWave()
 
     for i = 1, AmountOfZombies do
         SpawnRandomZombie(HealthMultiplier, RunnerChance, BruteChance)
+        ZombiesSpawned = ZombiesSpawned + 1
         sleep(math.max(0.5, 3 - Wave * 0.05) + math.random() * 0.5)
     end
 end
@@ -135,11 +138,11 @@ while true do
 
     repeat
         sleep(1)
-        local Output = commands.exec('scoreboard players get #zombies ZombiesAlive')
+        local Output = commands.exec('/scoreboard players get #zombies ZombiesAlive')
         local ZombiesAliveCount = tonumber(
             (type(Output) == "string" and Output:match('%d+'))
         ) or 0
-    until ZombiesAliveCount == 0
+    until ZombiesAliveCount == 0 and ZombiesSpawned == AmountOfZombies
 
     WaveInProgress = false
     sleep(0.1)
