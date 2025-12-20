@@ -7,15 +7,13 @@ commands.exec('/gamemode adventure @a')
 commands.exec('/clear @a')
 commands.exec('/team join Survivors @a')
 commands.exec('/scoreboard players set @a Points 0')
-commands.exec('/scoreboard players set #zombies ZombiesAlive 0')
 commands.exec('/give @a ' .. StarterGun)
 commands.exec('/give @a ' .. StarterAmmo .. ' ' .. StarterAmmoAmount)
 commands.exec('/give @a ' .. StarterMelee)
 
 local Wave = 0
 local WaveInProgress = false
-local ZombiesSpawned = 0
-local AmountOfZombies = 0
+
 local BaseHealth = {Generic = 20, Runner = 5, Brute = 40}
 local BaseDamage = {Generic = 3, Runner = 1.5, Brute = 6}
 local BaseSpeed = {Generic = 0.3, Runner = 0.4, Brute = 0.25}
@@ -35,57 +33,46 @@ local RandomTips = {
     'They will slow you down then eat your internal organs',
     'They will sniff you and track you down...',
     '-... .-. --- / .. -- .- --. .. -. . / .-- .- ... - .. -. --. / -.-- --- ..- .-. / - .. -- . / - --- / - .-. .- -. ... .-.. .- - . / - .... .. ... / .-.. --- .-..'
-
 }
 
-
-local function SpawnGenericZombie(Amount, Health, Damage, Speed, FollowRange)
-    for I = 1, Amount do
-        local Command = '/summon zombie ~ ~ ~ {Health:'..Health..'f,Attributes:[{Name:"generic.max_health",Base:'..Health..'f},{Name:"generic.attack_damage",Base:'..Damage..'f},{Name:"generic.movement_speed",Base:'..Speed..'f},{Name:"generic.follow_range",Base:'..FollowRange..'f}]}'
-        commands.exec(Command)
-    end
+local function SpawnZombie(command)
+    commands.exec(command)
 end
 
-local function SpawnRunnerZombie(Amount, Health, Damage, Speed, FollowRange)
-    for I = 1, Amount do
-        local Command = '/summon zombie ~ ~ ~ {Health:'..Health..'f,Attributes:[{Name:"generic.max_health",Base:'..Health..'f},{Name:"generic.attack_damage",Base:'..Damage..'f},{Name:"generic.movement_speed",Base:'..Speed..'f},{Name:"generic.follow_range",Base:'..FollowRange..'f}]}'
-        commands.exec(Command)
-    end
+local function SpawnGenericZombie(Health, Damage, Speed, FollowRange) 
+    SpawnZombie('/summon zombie ~ ~ ~ {Tags:["Zombie"],Health:'..Health..'f,Attributes:[{Name:"generic.max_health",Base:'..Health..'f},{Name:"generic.attack_damage",Base:'..Damage..'f},{Name:"generic.movement_speed",Base:'..Speed..'f},{Name:"generic.follow_range",Base:'..FollowRange..'f}]}')
 end
 
-local function SpawnBruteZombie(Amount, Health, Damage, Speed, FollowRange)
-    for I = 1, Amount do
-        local Command = '/summon zombie ~ ~ ~ {Health:'..Health..'f,Attributes:[{Name:"generic.max_health",Base:'..Health..'f},{Name:"generic.attack_damage",Base:'..Damage..'f},{Name:"generic.movement_speed",Base:'..Speed..'f},{Name:"generic.follow_range",Base:'..FollowRange..'f}],ArmorItems:[{id:"marbledsarsenal:black_juggernaut_armor_boots",Count:1},{id:"marbledsarsenal:black_juggernaut_armor_leggins",Count:1},{id:"marbledsarsenal:black_juggernaut_armor_chestplate",Count:1},{id:"marbledsarsenal:black_juggernaut_armor_helmet",Count:1}]}'
-        commands.exec(Command)
-    end
+
+local function SpawnRunnerZombie(Health, Damage, Speed, FollowRange) 
+    SpawnZombie('/summon zombie ~ ~ ~ {Tags:["Zombie"],Health:'..Health..'f,Attributes:[{Name:"generic.max_health",Base:'..Health..'f},{Name:"generic.attack_damage",Base:'..Damage..'f},{Name:"generic.movement_speed",Base:'..Speed..'f},{Name:"generic.follow_range",Base:'..FollowRange..'f}]}')
 end
 
---LETS GO GAMBLING!!
+
+local function SpawnBruteZombie(Health, Damage, Speed, FollowRange) 
+    SpawnZombie('/summon zombie ~ ~ ~ {Tags:["Zombie"],Health:'..Health..'f,Attributes:[{Name:"generic.max_health",Base:'..Health..'f},{Name:"generic.attack_damage",Base:'..Damage..'f},{Name:"generic.movement_speed",Base:'..Speed..'f},{Name:"generic.follow_range",Base:'..FollowRange..'f}],ArmorItems:[{id:"marbledsarsenal:black_juggernaut_armor_boots",Count:1},{id:"marbledsarsenal:black_juggernaut_armor_leggins",Count:1},{id:"marbledsarsenal:black_juggernaut_armor_chestplate",Count:1},{id:"marbledsarsenal:black_juggernaut_armor_helmet",Count:1}]}')
+end
+
+
 local function SpawnRandomZombie(HealthMultiplier, RunnerChance, BruteChance)
     local Roll = math.random()
 
     if Roll < BruteChance then
-
         SpawnBruteZombie(
-            1,
             BaseHealth.Brute * HealthMultiplier,
             BaseDamage.Brute,
             BaseSpeed.Brute,
             BaseFollowRange.Brute
         )
     elseif Roll < BruteChance + RunnerChance then
-
         SpawnRunnerZombie(
-            1,
             BaseHealth.Runner * HealthMultiplier,
             BaseDamage.Runner,
             BaseSpeed.Runner,
             BaseFollowRange.Runner
         )
     else
-        --aw dang it :(
         SpawnGenericZombie(
-            1,
             BaseHealth.Generic * HealthMultiplier,
             BaseDamage.Generic,
             BaseSpeed.Generic,
@@ -94,56 +81,44 @@ local function SpawnRandomZombie(HealthMultiplier, RunnerChance, BruteChance)
     end
 end
 
-
-
 local function SpawnNewWave()
+    sleep(1)
     WaveInProgress = true
-    commands.exec('/stopsound @a')
+    commands.exec('/stopsound @a master minecraft:pointblankzombies.ambiance1')
     commands.exec('/playsound minecraft:pointblankzombies.roundstart master @a')
     commands.exec('/tellraw @a {"text":"Wave '..Wave..' Has Been Completed!","color":"white","bold":true}')
     commands.exec('/effect give @a minecraft:saturation 10 50 false')
     commands.exec('/effect give @a minecraft:resistance 1 100 true')
     commands.exec('/effect give @a minecraft:darkness 2 0 true')
     commands.exec('/execute at @a run summon minecraft:lightning_bolt ~ ~ ~')
-    commands.exec('/scoreboard players set #zombies ZombiesAlive 0')
     commands.exec('/kill @e[type=minecraft:zombie]')
+
     sleep(12)
     Wave = Wave + 1
 
     local HealthMultiplier = 1 + (Wave - 1) * 0.1
-    AmountOfZombies = (Wave + 1) * 4
+    local AmountOfZombies = (Wave + 1) * 4
 
     local RunnerChance = math.min(0.2, Wave * 0.02)
     local BruteChance  = math.min(0.2, Wave * 0.015)
 
-    local RandomTip = RandomTips[math.random(1, 10)]
+    local RandomTip = RandomTips[math.random(#RandomTips)]
 
     commands.exec('/tellraw @a {"text":"Wave '..Wave..'","color":"red","bold":true}')
-    commands.exec('/tellraw @a {"text":"' .. RandomTip .. '","color":"dark_red","bold":true,"italic":true}')
-    commands.exec('/scoreboard players set #zombies ZombiesAlive 0')
+    commands.exec('/tellraw @a {"text":"'..RandomTip..'","color":"dark_red","bold":true,"italic":true}')
     commands.exec('/playsound minecraft:pointblankzombies.ambiance1 master @a ~ ~ ~ 0.5 1')
-    commands.exec('/scoreboard players set #zombies ZombiesAlive ' .. AmountOfZombies)
 
     for i = 1, AmountOfZombies do
         SpawnRandomZombie(HealthMultiplier, RunnerChance, BruteChance)
-        ZombiesSpawned = ZombiesSpawned + 1
         sleep(math.max(0.5, 3 - Wave * 0.05) + math.random() * 0.5)
     end
 end
 
 while true do
-    if not WaveInProgress then
+    sleep(1)
+    local ZombiesThere = commands.exec('/execute if entity @e[type=minecraft:zombie, tag=Zombie]')
+
+    if not ZombiesThere then
         SpawnNewWave()
     end
-
-    repeat
-        sleep(1)
-        local Output = commands.exec('/scoreboard players get #zombies ZombiesAlive')
-        local ZombiesAliveCount = tonumber(
-            (type(Output) == "string" and Output:match('%d+'))
-        ) or 0
-    until ZombiesAliveCount == 0 and ZombiesSpawned == AmountOfZombies
-
-    WaveInProgress = false
-    sleep(0.1)
 end
