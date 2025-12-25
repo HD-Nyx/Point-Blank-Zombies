@@ -33,3 +33,7 @@ The resource pack included in this project is a combination version of
 The original resource packs and its assets are not owned by me or this project.
 
 Credits: https://www.curseforge.com/minecraft/texture-packs/tissous-zombie-pack-optifine-1-7x-1-20 and https://www.curseforge.com/minecraft/texture-packs/skt-desaturated-vanilla
+
+Want to support?
+SKT: https://ko-fi.com/dreamvsl
+Tissue: https://www.paypal.com/donate?token=9aycYABCfllW8gyKCR0GGThXS87WZGUSbvzlCYzwv_sARbhHpC_Bl8ygFNx0VYgStvbUhUfi2T5G9smo&locale.x=US
