@@ -25,21 +25,29 @@
 commands.exec('/scoreboard objectives add Points dummy "Points"')
 commands.exec('/scoreboard objectives setdisplay sidebar Points')
 
-commands.exec('/scoreboard objectives add ZombiesAlive dummy')
+commands.exec('/scoreboard objectives add KilledZombie minecraft.killed:minecraft.zombie')
 
+commands.exec('/difficulty hard')
 commands.exec('/team add Survivors')
 commands.exec('/team modify Survivors friendlyFire false')
 
 commands.exec('/gamerule doFireTick false')
-
+commands.exec('/gamerule doMobLoot false')
+commands.exec('/gamerule doMobSpawning false')
+commands.exec('/gamerule doDaylightCycle false')
 --Place these command blocks and put the command and its propertys
 
 --Repeating, Unconditional, Always Active
 --/execute as @a[scores={KilledZombie=1..}] at @s run scoreboard players add @s Points 100
 
 --Chain, Unconditional, Always Active
---/execute if entity @a[scores={KilledZombie=1..}] run scoreboard players remove #zombie ZombiesAlive 1
-
---Chain, Unconditional, Always Active
 --/scoreboard players reset @a[scores={KilledZombie=1..}] KilledZombie
 
+--Zombie Spawner (do the command where you want them to be, mutiple are allowed)
+--/summon minecraft:armor_stand ~ ~ ~ {Invisible:1b,Invulnerable:1b,NoGravity:1b,Marker:1b,PersistenceRequired:1b,Tags:["ZombieSpawner"]}
+
+--Player spawner (only one per world)
+--/summon minecraft:armor_stand ~ ~ ~ {Invisible:1b,Invulnerable:1b,NoGravity:1b,Marker:1b,PersistenceRequired:1b,Tags:["PlayerSpawner"]}
+
+--Use this to verify if there is any spawners
+--/tag @e[type=minecraft:armor_stand] list

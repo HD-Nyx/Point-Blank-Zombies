@@ -1,5 +1,6 @@
 --Simple template for buyng weapons/guns
 --Only setup you need to do is replace Item, Ammo, AmmoAmount and Price to your likeing
+--Make sure you rename this script to startup.lua in CC:Tweaked [rename Purchase.lua startup.lua]
 
 local Item = "pointblank:ak74"
 local Ammo = "pointblank:ammo545"
