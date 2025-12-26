@@ -1,4 +1,8 @@
 # Point-Blank-Zombies
+
+<img width="1228" height="611" alt="PointBlankzombiesBanner" src="https://github.com/user-attachments/assets/682e6f49-309c-4882-b339-d6e6c8668faf" />
+
+
 Recreating a zombie game that is like call of duty zombies in minecraft using point blank as the gun system and CC:Tweaked as logic handling.
 
 Currently the code and the resoursepack is not done, I will make a release once it is ready (most likely a modpack with some maps included).
