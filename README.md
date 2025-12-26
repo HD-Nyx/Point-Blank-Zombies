@@ -1,7 +1,7 @@
 # Point-Blank-Zombies
 Recreating a zombie game that is like call of duty zombies in minecraft using point blank as the gun system and CC:Tweaked as logic handling.
 
-Currently the code and the resoursepack is not done, I will make a release once it is ready.
+Currently the code and the resoursepack is not done, I will make a release once it is ready (most likely a modpack with some maps included).
 
 [Subject to change] The resoursepack will be using [Tissou's Zombie Pack](https://www.curseforge.com/minecraft/texture-packs/tissous-zombie-pack-optifine-1-7x-1-20) and [SKT - Desaturated Vanilla](https://www.curseforge.com/minecraft/texture-packs/skt-desaturated-vanilla) + my own additions like sounds and music
 
