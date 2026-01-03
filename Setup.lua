@@ -22,10 +22,11 @@
 --After thee commmands, it won't display anything until a player gets a point, then it should show up
 --If it still doesnt work after that then try manually enter the commands
 
-commands.exec('/scoreboard objectives add Points dummy "Points"')
+commands.exec('/scoreboard objectives add Points dummy')
 commands.exec('/scoreboard objectives setdisplay sidebar Points')
 
 commands.exec('/scoreboard objectives add KilledZombie minecraft.killed:minecraft.zombie')
+commands.exec('/scoreboard objectives add StartGame dummy')
 
 commands.exec('/difficulty hard')
 commands.exec('/team add Survivors')
@@ -35,6 +36,8 @@ commands.exec('/gamerule doFireTick false')
 commands.exec('/gamerule doMobLoot false')
 commands.exec('/gamerule doMobSpawning false')
 commands.exec('/gamerule doDaylightCycle false')
+commands.exec('/gamerule doWeatherCycle false')
+
 --Place these command blocks and put the command and its propertys
 
 --Repeating, Unconditional, Always Active
@@ -48,6 +51,9 @@ commands.exec('/gamerule doDaylightCycle false')
 
 --Player spawner (only one per world)
 --/summon minecraft:armor_stand ~ ~ ~ {Invisible:1b,Invulnerable:1b,NoGravity:1b,Marker:1b,PersistenceRequired:1b,Tags:["PlayerSpawner"]}
+
+--Lobby Spawn (only one per world)
+--/summon minecraft:armor_stand ~ ~ ~ {Invisible:1b,Invulnerable:1b,NoGravity:1b,Marker:1b,PersistenceRequired:1b,Tags:["LobbySpawn"]}
 
 --Use this to verify if there is any spawners
 --/tag @e[type=minecraft:armor_stand] list
